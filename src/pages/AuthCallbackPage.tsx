@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const AuthCallbackPage = () => {
-  const { createUser, isLoading, isError, isSuccess } = useCreateMyUser();
+  const { createUser } = useCreateMyUser(); //isLoading, isError, isSuccess inside the const too
   const { user } = useAuth0();
   const navigate = useNavigate();
   const hasCreatedUser = useRef(false);

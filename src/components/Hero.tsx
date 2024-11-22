@@ -1,4 +1,3 @@
-import hero from "../assets/hero.png"
 import sushi from "../assets/sushi.jpg"
 const Hero = () => {
   return(
