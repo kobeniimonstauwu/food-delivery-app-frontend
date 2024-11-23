@@ -28,7 +28,11 @@ const UsernameMenu = () => {
 
         <DropdownMenuItem>
           {/* Flex for making sure the width of the button holds up with the menu */}
-          <Button className="flex flex-1 font-bold bg-blue-700" onClick ={() => logout()}>
+          <Button className="flex flex-1 font-bold bg-blue-700" onClick ={() => logout({
+            logoutParams: {
+              returnTo: window.location.origin
+            }
+          })}>
             Logout
           </Button>
         </DropdownMenuItem>
