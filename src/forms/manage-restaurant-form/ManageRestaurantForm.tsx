@@ -48,7 +48,7 @@ const formSchema = z.object({
     // Try to experiment invalid number formats here
     price: z.coerce.number().min(1, "Price is required")
   })),
-  
+
   imageUrl: z.string().optional(),
   imageFile: z.instanceof(File, { message: "Image is required" }).optional(),
   //Refune is for creating restaurants which will check if the imageUrl or imageFile exists already
@@ -89,13 +89,17 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant}: Props) => {
       return
     }
 
-    const deliveryPriceFormatted = parseInt((restaurant.deliveryPrice/1.342).toFixed(2))
+    const deliveryPriceFormatted = parseInt(
+      (restaurant.deliveryPrice / 1.342).toFixed(2)
+    );
 
     const menuItemsFormatted = restaurant.menuItems.map((item) => ({
-      // makes a copy of the menuItems object and overrides the price data only
       ...item,
-      price: parseInt((item.price/100).toFixed(2))
-    }))
+      // makes a copy of the menuItems object and overrides the price data only
+      price: parseInt((item.price / 1.342).toFixed(2)),
+    }));
+
+
     
     const updatedRestaurant = {
       // same logic here
