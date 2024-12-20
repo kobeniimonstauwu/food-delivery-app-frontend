@@ -11,8 +11,8 @@ const UsernameMenu = () => {
   return(
     <DropdownMenu>
       {/* The trigger handles the formatting for the avatar and email text */}
-      <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-blue-700 gap-2">
-        <CircleUserRound className="text-blue-700"/>
+      <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-blue-400 gap-2 text-stone-200">
+        <CircleUserRound className="text-stone-200"/>
         {/* It finds then renders the email of the existing user, if there is none there will be an error, so we try to prevent that through
           making sure that the user exists through the auth page */}
         {user?.email}
@@ -23,7 +23,10 @@ const UsernameMenu = () => {
         <DropdownMenuItem>
           <Link to ="/user-profile" className="font-bold hover:text-blue-700"> User Profile </Link>
         </DropdownMenuItem>
-
+          
+        <DropdownMenuItem>
+          <Link to ="/manage-restaurant" className="font-bold hover:text-blue-700"> Manage Restaurant </Link>
+        </DropdownMenuItem>
         <Separator />
 
         <DropdownMenuItem>

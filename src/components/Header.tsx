@@ -7,7 +7,7 @@ import MainNav from "./MainNav";
 const Header = () => {
   return(
   // Border to the bottom of this div
-  <div className="border-b-2 border-b-blue-500 py-6 bg-sky-600">
+  <div className="border-b-2 border-b-blue-700 py-6 bg-blue-700">
     {/* Align content of the header and the page (relative/similar styling is applied), and to fix the positioning of the content of the Header*/}
     <div className="container mx-auto flex justify-between items-center">
         
@@ -17,7 +17,7 @@ const Header = () => {
         
         
 
-        <span className="text-3xl font-bold tracking-tight text-black">
+        <span className="text-3xl font-bold tracking-tight text-stone-200">
         OrionEats
         </span>
         </Link>

@@ -54,21 +54,22 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
       {/* Serves as the container for the form */}
       {/* handleSubmit is a function that will be responsible for checking the data and doing the validation, and if it succeeds in the check
       It will then pass the form data to onSave which is based on the UserFormData since it expects those data, and the formSchema is just for validation*/}
-      <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 bg-sky-600 rounded-lg md:p-10">
+      <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 bg-blue-800 rounded-lg md:p-10 text-stone-200">
         
         <div>
           <h2 className="text-2xl font-bold"> User Profile Form </h2>
-          <FormDescription className="text-black"> Change profile information </FormDescription>
+          <FormDescription className="text-stone-200 italic"> Change profile information </FormDescription>
         </div>
           {/* Control is needed to know what input is going to be used based on the properties of the type used in the useForm */}
         <FormField control={form.control} name="email" render={({field})=>(
           <FormItem>
-            <FormLabel className="font-bold"> Email </FormLabel>
+            <FormLabel> Email </FormLabel>
             {/* This formcontrol that wraps around the input handles the other errors in the frontend when it comes to different inputs*/}
             <FormControl>
-              <Input {...field} disabled className="bg-gray-50"/>
+              <Input {...field} disabled className="bg-gray-50 text-black"/>
               {/* the field just contains the properties of form's schema, userformdata, mostly everything in the form which helps in validating */}
               </FormControl>
+              <FormMessage />
           </FormItem>
         )}
 
@@ -77,10 +78,10 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
       based on its data type */}
       <FormField control={form.control} name="name" render={({field})=>(
           <FormItem>
-            <FormLabel className="font-bold"> Name </FormLabel>
+            <FormLabel> Name </FormLabel>
             {/* This formcontrol that wraps around the input handles the other errors in the frontend when it comes to different inputs*/}
             <FormControl>
-              <Input {...field} className="bg-white"/>
+              <Input {...field} className="bg-white text-black"/>
               {/* the field just contains the properties of form's schema, userformdata, mostly everything in the form which helps in validating */}
               </FormControl>
               {/* Display the message from the formSchema from the resolver we put */}
@@ -95,34 +96,37 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
       <FormField control={form.control} name="addressLine1" render={({field})=>(
           // Flex 1 will take the available space that it can depending on the div it's in
           <FormItem className="flex-1">
-            <FormLabel className="font-bold"> Address </FormLabel>
+            <FormLabel> Address </FormLabel>
             {/* This form control that wraps around the input handles the other errors in the frontend when it comes to different inputs*/}
             <FormControl>
-              <Input {...field} className="bg-white"/>
+              <Input {...field} className="bg-white text-black"/>
               {/* the field just contains the properties of form's schema, userformdata, mostly everything in the form which helps in validating */}
               </FormControl>
+              <FormMessage />
           </FormItem>
         )}
         />
            <FormField control={form.control} name="city" render={({field})=>(
           <FormItem className="flex-1">
-            <FormLabel className="font-bold"> City </FormLabel>
+            <FormLabel> City </FormLabel>
             {/* This form control that wraps around the input handles the other errors in the frontend when it comes to different inputs*/}
             <FormControl>
-              <Input {...field} className="bg-white"/>
+              <Input {...field} className="bg-white text-black"/>
               {/* the field just contains the properties of form's schema, userformdata, mostly everything in the form which helps in validating */}
               </FormControl>
+              <FormMessage />
           </FormItem>
         )}
         />
            <FormField control={form.control} name="country" render={({field})=>(
           <FormItem className="flex-1">
-            <FormLabel className="font-bold"> Country </FormLabel>
+            <FormLabel> Country </FormLabel>
             {/* This form control that wraps around the input handles the other errors in the frontend when it comes to different inputs*/}
             <FormControl>
-              <Input {...field} className="bg-white"/>
+              <Input {...field} className="bg-white text-black"/>
               {/* the field just contains the properties of form's schema, userformdata, mostly everything in the form which helps in validating */}
               </FormControl>
+              <FormMessage />
           </FormItem>
         )}
         />
