@@ -13,7 +13,7 @@ const MobileNav = () => {
       <SheetTrigger>
         {/* You can put the logic here for what causes the sheet to open */}
         {/* The trigger here is the menu icon */}
-        <Menu className="text-blue-700"/>
+        <Menu className="text-white"/>
       </SheetTrigger>
       {/* What's inside the sheet */}
       <SheetContent className = "space-y-3">

@@ -26,3 +26,12 @@ export type Restaurant = {
   imageUrl: string;
   lastUpdated: string;
 };
+// This is the type of the data that will come back as a response in search
+export type RestaurantSearchResponse = {
+  data: Restaurant[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  }
+}
