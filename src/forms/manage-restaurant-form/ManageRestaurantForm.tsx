@@ -90,14 +90,16 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant}: Props) => {
     }
 
     const deliveryPriceFormatted = parseInt(
-      (restaurant.deliveryPrice / 1.342).toFixed(2)
+      (restaurant.deliveryPrice / 1).toFixed(2)
     );
 
     const menuItemsFormatted = restaurant.menuItems.map((item) => ({
       ...item,
       // makes a copy of the menuItems object and overrides the price data only
-      price: parseInt((item.price / 1.342).toFixed(2)),
+      price: parseInt((item.price / 1).toFixed(2)),
     }));
+
+    
 
 
     
@@ -122,8 +124,8 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant}: Props) => {
     formData.append("restaurantName", formDataJson.restaurantName)
     formData.append("city", formDataJson.city)
     formData.append("country", formDataJson.country)
-    // 1 Peso = 1.342 pence
-    formData.append("deliveryPrice", (formDataJson.deliveryPrice * 1.342).toString())
+    // In the OrderController, it is times 100 because it is based on php centavos
+    formData.append("deliveryPrice", (formDataJson.deliveryPrice * 1).toString())
     formData.append("estimatedDeliveryTime", (formDataJson.estimatedDeliveryTime).toString())
     formDataJson.cuisines.forEach((cuisine, index) => {
       formData.append(`cuisines[${index}]`, cuisine)
@@ -134,7 +136,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant}: Props) => {
       // It will loop through everything inside menuItems array, left side is where it will be submitted (key), and the value is on the right side which is the json data
       // basically a key value pair, and the value is already using the data json through the formDataJson on the upper side
       formData.append(`menuItems[${index}][name]`, menuItem.name)
-      formData.append(`menuItems[${index}][price]`, (menuItem.price * 1.342).toString())
+      formData.append(`menuItems[${index}][price]`, (menuItem.price * 1).toString())
      
     })
     

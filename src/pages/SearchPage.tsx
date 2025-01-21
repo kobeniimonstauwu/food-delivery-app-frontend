@@ -17,8 +17,11 @@ export type SearchState = {
 
 // NOTE: It's easier to keep all state her to make data persistent (it's better to handle if it's in the parent component)
 const SearchPage = () => {
+  
   const { city } = useParams()
   // Inside the useState is the value for the expected type since there's a tag used in the useState
+  
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
   const [searchState, setSearchState] = useState<SearchState>({
     // When the state loads for the first time this will be the value of the searchQuery
@@ -29,7 +32,6 @@ const SearchPage = () => {
     sortOption: "lastUpdated"
   })
 
-  const [isExpanded, setIsExpanded] = useState<boolean>(false)
   const { results, isLoading } = useSearchRestaurants(searchState, city)
 
 
@@ -83,7 +85,8 @@ const SearchPage = () => {
   }
 
   if(!results?.data || !city){
-    return <span> No Results Found.</span>
+    return <span> No Results Found. </span>
+    // toast.message("No Results Found.")
   }
   return (
     // For smaller screens it will be only 1 column, while for larger screens it will have 2 columns where the left side is 250px and right will take the rest
@@ -107,7 +110,7 @@ const SearchPage = () => {
         {/* This is grouped since search result info and sortdropdown can be put in the same line through flexbox */}
         <div className="flex justify-between flex-col gap-3 lg:flex-row">
         <SearchResultInfo total={results.pagination.total} city={city}/>
-        <SortOptionDropdown sortOption={searchState.sortOption} onChange={(value) => setSortOption(value)} />
+        <SortOptionDropdown sortOption={searchState.sortOption} onChange={(option) => setSortOption(option)} />
         </div>
         
         {results.data.map((restaurant) => (

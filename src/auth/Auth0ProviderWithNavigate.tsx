@@ -1,7 +1,7 @@
 // Auth 0 is a good third party since we easily get the info from registered user, the auth 0 package is also linked to react, making it easy for us
 // This covers the routes and so on that's why it takes on children
 // import { useCreateMyUser } from "@/api/MyUserApi";
-import { Auth0Provider} from "@auth0/auth0-react"; // Add user / appstate if applicable
+import { AppState, Auth0Provider} from "@auth0/auth0-react"; // Add user / appstate if applicable
 import { useNavigate } from "react-router-dom";
 
 // to link data to the components here
@@ -29,13 +29,17 @@ const Auth0ProviderWithNavigate = ({children}: Props) => {
   // This is when we go back to the app after we log in from auth0 (onRedirectCallback) - we can manipulate what will happen after
 
   //appstate?: AppState, user?: User
-  const onRedirectCallback = () =>{
+  // NOTE: APPSTATE comes from the onRedirectCallback which activates when logging in, since there's an appstate within the loginWithRedirect for the 
+  // checkout button specifically, and that's why appstate is optional, only if there is
+  const onRedirectCallback = (appState? : AppState) =>{
     // 
     // If user is successfully created in the backend, it will copy and paste the auth0Id and email from auth0 to the endpoint so that it can remember the user (existing)
     // It can also know what user is knew 
 
-    navigate("/auth-callback"); // It's now in authprovider due to it being included in the AppRoutes
+    // It will only return to the current page if there is an appstate which is in the checkout button
+    navigate(appState?.returnTo ||"/auth-callback"); // It's now in authprovider due to it being included in the AppRoutes
     // console.log("USER", user);
+    
   };
 
   return(

@@ -21,7 +21,7 @@ const formSchema = z.object({
 })
 // Basically the UserFormData will take in the properties of the formSchema 
 // The way zod handles this is through infer, where it takes the formSchema and reads it and it's able to put the properties automatiocally into the the type assigned to it
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   // onSave is expecting user data
@@ -29,9 +29,11 @@ type Props = {
   currentUser: User;
   onSave:(userProfileData: UserFormData) => void;
   isLoading: boolean;
+  title?: string;
+  buttonText?: string;
 }
-
-const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
+// Default values are going to be used in the assignment of values here when there the optional props don't have a value
+const UserProfileForm = ({ onSave, isLoading, currentUser, title="User Profile", buttonText="Submit" }: Props) => {
   // Here is react hook form and the brackets are the properties and data expected on that react hook form
   const form = useForm<UserFormData>({
     // Here is the valodation (zod)
@@ -57,7 +59,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
       <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 bg-blue-800 rounded-lg md:p-10 text-stone-200">
         
         <div>
-          <h2 className="text-2xl font-bold"> User Profile Form </h2>
+          <h2 className="text-2xl font-bold"> {title} </h2>
           <FormDescription className="text-stone-200 italic"> Change profile information </FormDescription>
         </div>
           {/* Control is needed to know what input is going to be used based on the properties of the type used in the useForm */}
@@ -132,7 +134,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
         />
         </div>
 
-        {isLoading ? ( <LoadingButton/> ) : ( <Button type = "submit" className="bg-blue-700"> Submit </Button>)}
+        {isLoading ? ( <LoadingButton/> ) : ( <Button type = "submit" className="bg-blue-700"> {buttonText} </Button>)}
       </form>
       
 

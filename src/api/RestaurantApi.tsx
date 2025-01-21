@@ -1,8 +1,29 @@
 import { SearchState } from "@/pages/SearchPage"
-import { RestaurantSearchResponse } from "@/types"
+import { Restaurant, RestaurantSearchResponse } from "@/types"
 import { useQuery } from "react-query"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+// restaurantId is made optional since you won't be able to get it on first render, and will be grabbed by useParams
+// There's also a chance that restaurantId will be undefined
+export const useGetRestaurant = (restaurantId? : string) =>{
+  const getRestaurantByIdRequest = async(): Promise<Restaurant> =>{
+    const response = await fetch(`${API_BASE_URL}/api/restaurant/${restaurantId}`)
+
+    if(!response.ok){
+      throw new Error("Failed to get restaurant")
+    }
+  
+  return response.json()
+  
+  }
+
+  // the query will only be enabled if there if the api receives a restaurantId parameter, so there won't be any errors that will trigger and API requests
+  // won't be wasted since there's also a chance that the useParams at first render won't give the restaurantId a value
+  const { data: restaurant, isLoading } = useQuery("fetchRestaurant", getRestaurantByIdRequest, {enabled: !!restaurantId})
+
+  return { restaurant, isLoading }
+}
 // city is optional since hooks loading for the first time will return undefined, which will be solved later on as we handle it
 export const useSearchRestaurants = (searchState: SearchState, city? : string) => {
   const createSearchRequest = async(): Promise<RestaurantSearchResponse> => {
