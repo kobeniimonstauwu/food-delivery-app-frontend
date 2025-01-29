@@ -7,7 +7,7 @@ const ManageRestaurantPage = () => {
   // onSave already has the form data in it, and it's calling the createRestaurant from the api and it will pass the form data there to submit the query
   const { createRestaurant, isLoading: isCreateLoading } = useCreateMyRestaurant()
   const { restaurant, isLoading: isGetLoading } = useGetMyRestaurant()
-  const { orders, isLoading: isOrdersLoading } = useGetMyRestaurantOrders()
+  const { orders } = useGetMyRestaurantOrders()
   const { updateRestaurant, isLoading: isUpdateLoading } = useUpdateMyRestaurant()
   if(isGetLoading){
     return <span> Loading... </span>
