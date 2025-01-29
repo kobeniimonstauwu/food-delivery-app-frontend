@@ -1,6 +1,39 @@
+import { Order } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react"
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+export const useGetMyOrders = () => {
+  const {getAccessTokenSilently} = useAuth0()
+
+  const getMyOrdersRequest = async(): Promise<Order[]> =>{
+    const accessToken = await getAccessTokenSilently()
+
+    const response = await fetch(`${API_BASE_URL}/api/order`,{
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }
+    })
+
+    if(!response.ok){
+      throw new Error("Failed to fetch orders")
+    }
+    
+
+    return response.json()
+  }
+  // refetch intervals makes sure the data here for the order is refetched every 5 seconds (for the order status) without the 
+  // users refreshing the page
+  const {data: orders, isLoading} = useQuery("fetchMyOrders", getMyOrdersRequest, { refetchInterval: 5000})
+  
+  return {
+    orders, isLoading
+  }
+}
 
 // This is also used for the frontend side, you can use a shared folder but it will be complex since our front and backend have different servers
 // It will be extra work for deployment but would be nice to improve on
@@ -20,12 +53,13 @@ type CheckoutSessionRequest = {
     addressLine1: string
     // No country because we can get that info from stripe
     city: string
+    country: string
   }
   restaurantId: string
 }
 
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export const useCreateCheckoutSession = () =>{
   const{getAccessTokenSilently} = useAuth0()
@@ -63,3 +97,4 @@ export const useCreateCheckoutSession = () =>{
   }
 
 }
+

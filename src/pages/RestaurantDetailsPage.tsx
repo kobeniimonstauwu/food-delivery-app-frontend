@@ -134,8 +134,8 @@ const RestaurantDetailPage = () => {
         email: userFormData.email as string,
         name: userFormData.name,
         addressLine1: userFormData.addressLine1,
-        country: userFormData.country,
         city: userFormData.city,
+        country: userFormData.country,
         
       }
     }
