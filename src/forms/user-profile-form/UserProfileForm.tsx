@@ -56,7 +56,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser, title="User Profile",
       {/* Serves as the container for the form */}
       {/* handleSubmit is a function that will be responsible for checking the data and doing the validation, and if it succeeds in the check
       It will then pass the form data to onSave which is based on the UserFormData since it expects those data, and the formSchema is just for validation*/}
-      <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 bg-blue-800 rounded-lg md:p-10 text-stone-200">
+      <form onSubmit={form.handleSubmit(onSave)} className="p-10 space-y-4 bg-blue-800 rounded-lg md:p-10 text-stone-200">
         
         <div>
           <h2 className="text-2xl font-bold"> {title} </h2>
